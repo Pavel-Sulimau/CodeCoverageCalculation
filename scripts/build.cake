@@ -10,12 +10,12 @@ var testProjectsRelativePaths = new string[]
     "../tests/CodeCoverageCalculation.Domain.Tests/CodeCoverageCalculation.Domain.Tests.csproj"
 };
 
-/*  Change the output artefacts and their configuration here. */
+/*  Change the output artifacts and their configuration here. */
 var parentDirectory = Directory("..");
 var coverageDirectory = parentDirectory + Directory("code_coverage");
 var cuberturaFileName = "results";
 var cuberturaFileExtension = ".cobertura.xml";
-var reportTypes = "htmlInline";
+var reportTypes = "HtmlInline_AzurePipelines"; // Use "Html" value locally for performance and files' size.
 var coverageFilePath = coverageDirectory + File(cuberturaFileName + cuberturaFileExtension);
 var jsonFilePath = coverageDirectory + File(cuberturaFileName + ".json");;
 
@@ -54,12 +54,12 @@ Task("Test")
     {
         DotNetCoreTest(testProjectsRelativePaths[0], testSettings, coverletSettings);
 
-        coverletSettings.CoverletOutputFormat  = CoverletOutputFormat.cobertura;
+        coverletSettings.MergeWithFile = jsonFilePath;
         for (int i = 1; i < testProjectsRelativePaths.Length; i++)
         {
             if (i == testProjectsRelativePaths.Length - 1)
             {
-                coverletSettings.MergeWithFile = jsonFilePath;
+                coverletSettings.CoverletOutputFormat  = CoverletOutputFormat.cobertura;
             }
 
             DotNetCoreTest(testProjectsRelativePaths[i], testSettings, coverletSettings);

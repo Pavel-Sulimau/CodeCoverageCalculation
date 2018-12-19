@@ -7,18 +7,18 @@
 <#
 
 .SYNOPSIS
-This is a Powershell script to bootstrap a Cake build.
+This is a Powershell script to bootstrap a Cake run_tests_and_generate_coverage_report.
 
 .DESCRIPTION
 This Powershell script will download NuGet if missing, restore NuGet tools (including Cake)
-and execute your Cake build script with the parameters you provide.
+and execute your Cake run_tests_and_generate_coverage_report script with the parameters you provide.
 
 .PARAMETER Script
-The build script to execute.
+The run_tests_and_generate_coverage_report script to execute.
 .PARAMETER Target
-The build script target to run.
+The run_tests_and_generate_coverage_report script target to run.
 .PARAMETER Configuration
-The build configuration to use.
+The run_tests_and_generate_coverage_report configuration to use.
 .PARAMETER Verbosity
 Specifies the amount of information to be displayed.
 .PARAMETER ShowDescription
@@ -37,7 +37,7 @@ https://cakebuild.net
 
 [CmdletBinding()]
 Param(
-    [string]$Script = "build.cake",
+    [string]$Script = "run_tests_and_generate_coverage_report.cake",
     [string]$Target,
     [string]$Configuration,
     [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
@@ -98,7 +98,7 @@ function GetProxyEnabledWebClient
     return $wc
 }
 
-Write-Host "Preparing to run build script..."
+Write-Host "Preparing to run run_tests_and_generate_coverage_report script..."
 
 if(!$PSScriptRoot){
     $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
@@ -227,7 +227,7 @@ if (!(Test-Path $CAKE_EXE)) {
 
 
 
-# Build Cake arguments
+# run_tests_and_generate_coverage_report Cake arguments
 $cakeArguments = @("$Script");
 if ($Target) { $cakeArguments += "-target=$Target" }
 if ($Configuration) { $cakeArguments += "-configuration=$Configuration" }
@@ -237,6 +237,6 @@ if ($DryRun) { $cakeArguments += "-dryrun" }
 $cakeArguments += $ScriptArgs
 
 # Start Cake
-Write-Host "Running build script..."
+Write-Host "Running run_tests_and_generate_coverage_report script..."
 &$CAKE_EXE $cakeArguments
 exit $LASTEXITCODE

@@ -27,7 +27,7 @@ else
 fi
 
 # Define default arguments.
-SCRIPT="build.cake"
+SCRIPT="run_tests_and_generate_coverage_report.cake"
 CAKE_ARGUMENTS=()
 
 # Parse arguments.

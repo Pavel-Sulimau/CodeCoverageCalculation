@@ -17,7 +17,7 @@ var cuberturaFileName = "results";
 var cuberturaFileExtension = ".cobertura.xml";
 var reportTypes = "HtmlInline_AzurePipelines"; // Use "Html" value locally for performance and files' size.
 var coverageFilePath = coverageDirectory + File(cuberturaFileName + cuberturaFileExtension);
-var jsonFilePath = coverageDirectory + File(cuberturaFileName + ".json");;
+var jsonFilePath = coverageDirectory + File(cuberturaFileName + ".json");
 
 Task("Clean")
     .Does(() =>
